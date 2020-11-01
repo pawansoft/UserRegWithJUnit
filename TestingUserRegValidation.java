@@ -60,16 +60,16 @@ public class TestingUserRegValidation {
     }
 
     @Test
-    public void testPassword_WhenSatisfyRule1_ShouldReturnTrue() {
+    public void testPassword_WhenSatisfyRule2_ShouldReturnTrue() {
         UserRegistration userRegistration = new UserRegistration();
-        boolean isPasswordValid =  userRegistration.checkPassword("cjsolshr");
+        boolean isPasswordValid =  userRegistration.checkPassword("cjsolsPhr");
         Assert.assertTrue(isPasswordValid);
     }
 
     @Test
-    public void testPassword_WhenNotSatisfyRule1_ShouldReturnFalse() {
+    public void testPassword_WhenNotSatisfyRule2_ShouldReturnFalse() {
         UserRegistration userRegistration = new UserRegistration();
-        boolean isPasswordInvalid =  userRegistration.checkPassword("cjsolsh");
+        boolean isPasswordInvalid =  userRegistration.checkPassword("cjsolshr");
         Assert.assertFalse(isPasswordInvalid);
     }
 }
