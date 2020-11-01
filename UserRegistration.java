@@ -19,4 +19,3 @@ public class UserRegistration {
         return (passcode.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[*.!@#$%^&(){}:'<>,.>/~`_+=|].).{8,}$"));
     }
 }
-

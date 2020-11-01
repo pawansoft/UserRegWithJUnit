@@ -73,4 +73,3 @@ public class TestingUserRegValidation {
         Assert.assertFalse(isPasswordInvalid);
     }
 }
-
