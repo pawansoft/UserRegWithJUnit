@@ -30,4 +30,18 @@ public class TestingUserRegValidation {
         boolean isLNameInvalid = userRegistration.checkLName("kumar");
         Assert.assertFalse(isLNameInvalid);
     }
+
+    @Test
+    public void testEmailId_WhenValueIsValid_ShouldReturnTrue(){
+        UserRegistration userRegistration = new UserRegistration();
+        boolean isEmailIdValid = userRegistration.checkEmail("pk.soft29@gmail.com");
+        Assert.assertTrue(isEmailIdValid);
+    }
+
+    @Test
+    public void testEmailId_WhenValueIsInvalid_ShouldReturnFalse() {
+        UserRegistration userRegistration = new UserRegistration();
+        boolean isEmailIdInvalid = userRegistration.checkEmail("pk.soft29@.com");
+        Assert.assertFalse(isEmailIdInvalid);
+    }
 }
