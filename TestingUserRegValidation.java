@@ -15,6 +15,19 @@ public class TestingUserRegValidation {
         UserRegistration userRegistration = new UserRegistration();
         boolean isFNameValid = userRegistration.checkFName("pawan");
         Assert.assertFalse(isFNameValid);
+    }
 
+    @Test
+    public void testLastName_WhenValueIsValid_ShouldReturnTrue() {
+        UserRegistration userRegistration = new UserRegistration();
+        boolean isLNameValid = userRegistration.checkLName("Kumar");
+        Assert.assertTrue(isLNameValid);
+    }
+
+    @Test
+    public void testLastName_WhenValueIsInvalid_ShouldReturnFalse(){
+        UserRegistration userRegistration = new UserRegistration();
+        boolean isLNameInvalid = userRegistration.checkLName("kumar");
+        Assert.assertFalse(isLNameInvalid);
     }
 }
