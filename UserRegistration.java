@@ -14,4 +14,9 @@ public class UserRegistration {
     public boolean checkPhoneNumber(String phoneNo) {
         return (phoneNo.matches("^[0-9]{1,2}[ ][0-9]{10}$"));
     }
+
+    public boolean checkPassword(String passcode) {
+        return (passcode.matches("[0-9a-zA-Z]{8,}"));
+    }
 }
+
