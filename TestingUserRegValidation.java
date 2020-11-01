@@ -41,7 +41,21 @@ public class TestingUserRegValidation {
     @Test
     public void testEmailId_WhenValueIsInvalid_ShouldReturnFalse() {
         UserRegistration userRegistration = new UserRegistration();
-        boolean isEmailIdInvalid = userRegistration.checkEmail("pk.soft29@.com");
-        Assert.assertFalse(isEmailIdInvalid);
+        boolean isEmailIdInValid = userRegistration.checkEmail("pk.soft29@.com");
+        Assert.assertFalse(isEmailIdInValid);
+    }
+
+    @Test
+    public void testMobileNum_WhenValueIsValid_ShouldReturnTrue() {
+        UserRegistration userRegistration = new UserRegistration();
+        boolean isPhoneNumberValid = userRegistration.checkPhoneNumber("91 8083373213");
+        Assert.assertTrue(isPhoneNumberValid);
+    }
+
+    @Test
+    public void testMobileNum_WhenValueIsInvalid_ShouldReturnFalse() {
+        UserRegistration userRegistration = new UserRegistration();
+        boolean isPhoneNumberInvalid = userRegistration.checkPhoneNumber("8083373213");
+        Assert.assertFalse(isPhoneNumberInvalid);
     }
 }
