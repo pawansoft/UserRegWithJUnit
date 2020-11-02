@@ -18,4 +18,13 @@ public class UserRegistration {
     public boolean checkPassword(String passcode) {
         return (passcode.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[*.!@#$%^&(){}:'<>,.>/~`_+=|].).{8,}$"));
     }
+
+    public String moodAnalyse(String fName, String lName, String phoneNumber, String email, String password ) {
+        if(checkFName(fName) == true && checkLName(lName) == true && checkEmail(email) == true && checkPhoneNumber(phoneNumber) == true && checkPassword(password) == true){
+            return "HAPPY";
+        }
+        else {
+            return "SAD";
+        }
+    }
 }
