@@ -9,9 +9,8 @@ import java.util.Collection;
 @RunWith(Parameterized.class)
 public class TestAllEmails {
     private String emails;
-    private boolean expectedResult;
-
-    public TestAllEmails(String emails, boolean expectedResult) {
+    private String expectedResult;
+    public TestAllEmails(String emails, String expectedResult) {
         this.emails = emails;
         this.expectedResult = expectedResult;
     }
@@ -20,33 +19,29 @@ public class TestAllEmails {
     public static Collection input()
     {
         return Arrays.asList(new Object[][]{
-                {"abc@yahoo.com", true},
-                {"abc-100@yahoo.com", true},
-                {"abc.100@yahoo.com", true},
-                {"abc111@abc.com", true},
-                {"abc-100@abc.net", true},
-                {"abc.100@abc.com.au", true},
-                {"abc@1.com", true},
-                {"abc@gmail.com.com", true},
-                {"abc+100@gmail.com", true},
-                {"abc", false},
-                {"abc@.com.my", false},
-                {"abc123@gmail.a", false},
-                {"abc123@.com", false},
-                {"abc123@.com.com", false},
-                {".abc@abc.com", false},
-                {"abc()*@gmail.com", false},
-                {"abc@%*.com", false},
-                {"abc..2002@gmail.com", false},
-                {"abc.@gmail.com", false},
-                {"abc@abc@gmail.com", false},
-                {"abc@gmail.com.1a", false},
+                {"abc@yahoo.com", "Success"},
+                {"abc-100@yahoo.com", "Success"},
+                {"abc.100@yahoo.com", "Success"},
+                {"abc111@abc.com", "Success"},
+                {"abc-100@abc.net", "Success"},
+                {"abc.100@abc.com.au", "Success"},
+                {"abc@1.com", "Success"},
+                {"abc@gmail.com.com", "Success"},
+                {"abc+100@gmail.com", "Success"},
         });
     }
 
     @Test
     public void testEmailIds() {
         UserRegistration userRegistration = new UserRegistration();
-        Assert.assertEquals(expectedResult, userRegistration.checkEmail(emails));
+        String email = null;
+        try {
+             email = userRegistration.checkEmail(emails);
+        }
+        catch (InvalidDetailExceptions e)
+        {
+            Assert.assertEquals(expectedResult, email);
+        }
+
     }
 }

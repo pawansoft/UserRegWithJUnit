@@ -4,86 +4,202 @@ import org.junit.Test;
 public class TestingUserRegValidation {
 
     @Test
-    public void testUserFirstName_whenValid_ShouldReturnTrue() {
+    public void testUserFirstName_whenValid_ShouldReturnSuccess() {
         UserRegistration userRegistration = new UserRegistration();
-        boolean isFNameValid = userRegistration.checkFName("Pawan");
-        Assert.assertTrue(isFNameValid);
+        String isFNameValid = null;
+        try {
+            isFNameValid = userRegistration.checkFName("Pawan");
+        }
+        catch (InvalidDetailExceptions e){
+            Assert.assertEquals("Success", isFNameValid);
+        }
+
     }
 
     @Test
-    public void testFirstName_WhenValueIsInvalid_shouldReturnFalse() {
+    public void testFirstName_WhenValueIsInvalid_shouldReturnException() {
         UserRegistration userRegistration = new UserRegistration();
-        boolean isFNameValid = userRegistration.checkFName("pawan");
-        Assert.assertFalse(isFNameValid);
+        String isFNameValid = null;
+        try {
+            userRegistration.checkFName("pawan");
+        }
+        catch (InvalidDetailExceptions e){
+            Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, e.type);
+        }
     }
 
     @Test
-    public void testLastName_WhenValueIsValid_ShouldReturnTrue() {
+    public void testFirstName_WhenPassNullValue_shouldNullValueException() {
         UserRegistration userRegistration = new UserRegistration();
-        boolean isLNameValid = userRegistration.checkLName("Kumar");
-        Assert.assertTrue(isLNameValid);
+        String isFNameValid = null;
+        try {
+            userRegistration.checkFName(null);
+        }
+        catch (InvalidDetailExceptions e){
+            Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, e.type);
+        }
     }
 
     @Test
-    public void testLastName_WhenValueIsInvalid_ShouldReturnFalse(){
+    public void testLastName_WhenValueIsValid_ShouldReturnSuccess() {
         UserRegistration userRegistration = new UserRegistration();
-        boolean isLNameInvalid = userRegistration.checkLName("kumar");
-        Assert.assertFalse(isLNameInvalid);
+        String islNameValid = null;
+        try {
+            islNameValid = userRegistration.checkLName("Kumar");
+        }
+        catch (InvalidDetailExceptions e){
+            Assert.assertEquals("Success" , islNameValid);
+        }
     }
 
     @Test
-    public void testEmailId_WhenValueIsValid_ShouldReturnTrue(){
+    public void testLastName_WhenValueIsInvalid_ShouldThrowInvalidException(){
         UserRegistration userRegistration = new UserRegistration();
-        boolean isEmailIdValid = userRegistration.checkEmail("pk.soft29@gmail.com");
-        Assert.assertTrue(isEmailIdValid);
+        try {
+           userRegistration.checkLName("Kumar");
+        }
+        catch (InvalidDetailExceptions e){
+            Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, e.type);
+        }
     }
 
     @Test
-    public void testEmailId_WhenValueIsInvalid_ShouldReturnFalse() {
+    public void testLastName_WhenValueIsNull_ShouldThrowNullPointerException(){
         UserRegistration userRegistration = new UserRegistration();
-        boolean isEmailIdInValid = userRegistration.checkEmail("pk.soft29@.com");
-        Assert.assertFalse(isEmailIdInValid);
+        try {
+            userRegistration.checkLName(null);
+        }
+        catch (InvalidDetailExceptions e){
+            Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, e.type);
+        }
     }
 
     @Test
-    public void testMobileNum_WhenValueIsValid_ShouldReturnTrue() {
+    public void testEmailId_WhenValueIsValid_ShouldReturnSuccess(){
         UserRegistration userRegistration = new UserRegistration();
-        boolean isPhoneNumberValid = userRegistration.checkPhoneNumber("91 8083373213");
-        Assert.assertTrue(isPhoneNumberValid);
+        String isEmailValid = null;
+        try {
+                isEmailValid = userRegistration.checkEmail("pk.soft29@gmail.com");
+        }
+        catch (InvalidDetailExceptions e)
+        {
+            Assert.assertEquals("Success", isEmailValid);
+        }
     }
 
     @Test
-    public void testMobileNum_WhenValueIsInvalid_ShouldReturnFalse() {
+    public void testEmailId_WhenValueIsInvalid_ShouldThrowInvalidDetailException() {
         UserRegistration userRegistration = new UserRegistration();
-        boolean isPhoneNumberInvalid = userRegistration.checkPhoneNumber("8083373213");
-        Assert.assertFalse(isPhoneNumberInvalid);
+        try {
+            userRegistration.checkEmail("pk.@.com");
+        }
+        catch (InvalidDetailExceptions e) {
+            Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, e.type);
+        }
     }
 
     @Test
-    public void testPassword_WhenSatisfyRule2_ShouldReturnTrue() {
+    public void testEmailId_WhenValueIsNull_ShouldThrowNullPointerException() {
         UserRegistration userRegistration = new UserRegistration();
-        boolean isPasswordValid =  userRegistration.checkPassword("cjsols@3Phr");
-        Assert.assertTrue(isPasswordValid);
+        try {
+            userRegistration.checkEmail(null);
+        }
+        catch (InvalidDetailExceptions e) {
+            Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, e.type);
+        }
     }
 
     @Test
-    public void testPassword_WhenNotSatisfyRule2_ShouldReturnFalse() {
+    public void testMobileNum_WhenValueIsValid_ShouldReturnSuccess() {
         UserRegistration userRegistration = new UserRegistration();
-        boolean isPasswordInvalid =  userRegistration.checkPassword("cjsols3Phr");
-        Assert.assertFalse(isPasswordInvalid);
+        String isPhoneValid = null;
+        try {
+            isPhoneValid = userRegistration.checkPhoneNumber("91 8082273213");
+        }
+        catch (InvalidDetailExceptions e) {
+            Assert.assertEquals("Success", isPhoneValid);
+        }
+    }
+
+    @Test
+    public void testMobileNum_WhenValueIsInvalid_ShouldInvalidDetailException() {
+        UserRegistration userRegistration = new UserRegistration();
+        try {
+            userRegistration.checkPhoneNumber("808337");
+        }
+        catch (InvalidDetailExceptions e) {
+            Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, e.type);
+        }
+    }
+
+    @Test
+    public void testMobileNum_WhenPassedNullValue_ShouldThrowNullPointerException() {
+        UserRegistration userRegistration = new UserRegistration();
+        try {
+            userRegistration.checkPhoneNumber(null);
+        }
+        catch (InvalidDetailExceptions e) {
+            Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, e.type);
+        }
+    }
+
+    @Test
+    public void testPassword_WhenSatisfyRule2_ShouldReturnSuccess() {
+        UserRegistration userRegistration = new UserRegistration();
+        String isValidPassword = null;
+        try {
+            isValidPassword = userRegistration.checkPassword("Pk@804426");
+        }
+        catch (InvalidDetailExceptions e){
+            Assert.assertEquals("Success", isValidPassword);
+        }
+    }
+
+    @Test
+    public void testPassword_WhenNotSatisfyRule2_ShouldThrowInvalidPassException() {
+        UserRegistration userRegistration = new UserRegistration();
+        try {
+            userRegistration.checkPassword("abc");
+        }
+        catch (InvalidDetailExceptions e){
+            Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, e.type);
+        }
+    }
+
+
+    @Test
+    public void testPassword_WhenPassedNullValue_ShouldThrowNullPointerException() {
+        UserRegistration userRegistration = new UserRegistration();
+        try {
+            userRegistration.checkPassword(null);
+        }
+        catch (InvalidDetailExceptions e){
+            Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, e.type);
+        }
     }
 
     @Test
     public void mood_Analyser_Test_Happy() {
         UserRegistration userRegistration = new UserRegistration();
-        String isMoodHappy = userRegistration.moodAnalyse("Pawan", "Kumar", "91 8083373213", "pk.soft29@gmail.com", "16123@Pawan");
-        Assert.assertEquals("HAPPY", isMoodHappy);
+        String isMoodHappy = null;
+        try {
+            isMoodHappy = userRegistration.moodAnalyse("Pawan", "Kumar", "91 8083373213", "pk.soft29@gmail.com", "16123@Pawan");
+        }
+        catch (InvalidDetailExceptions e) {
+            Assert.assertEquals("HAPPY", isMoodHappy);
+        }
     }
 
     @Test
     public void mood_Analyser_Test_Sad() {
         UserRegistration userRegistration = new UserRegistration();
-        String isMoodSad = userRegistration.moodAnalyse("pawan", "kumar", "8083373213", "pk.soft@.com", "804426");
-        Assert.assertEquals("SAD", isMoodSad);
+        String isMoodSad = null;
+        try {
+            isMoodSad = userRegistration.moodAnalyse("pawan", "kumar", "8083373213", "pk.soft29@.com", "16123@awan");
+        }
+        catch (InvalidDetailExceptions e) {
+            Assert.assertEquals("SAD", isMoodSad);
+        }
     }
 }
+
