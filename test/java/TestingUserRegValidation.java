@@ -13,13 +13,11 @@ public class TestingUserRegValidation {
         catch (InvalidDetailExceptions e){
             Assert.assertEquals("Success", isFNameValid);
         }
-
     }
 
     @Test
     public void testFirstName_WhenValueIsInvalid_shouldReturnException() {
         UserRegistration userRegistration = new UserRegistration();
-        String isFNameValid = null;
         try {
             userRegistration.validateFName("pawan");
         }
@@ -31,7 +29,6 @@ public class TestingUserRegValidation {
     @Test
     public void testFirstName_WhenPassNullValue_shouldNullValueException() {
         UserRegistration userRegistration = new UserRegistration();
-        String isFNameValid = null;
         try {
             userRegistration.validateFName(null);
         }
@@ -56,7 +53,7 @@ public class TestingUserRegValidation {
     public void testLastName_WhenValueIsInvalid_ShouldThrowInvalidException(){
         UserRegistration userRegistration = new UserRegistration();
         try {
-           userRegistration.validateLName("Kumar");
+           userRegistration.validateLName("kumar");
         }
         catch (InvalidDetailExceptions e){
             Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, e.type);

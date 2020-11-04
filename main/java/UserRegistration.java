@@ -1,80 +1,77 @@
 public class UserRegistration {
 
-    private static String nameFormat = "[A-Z][a-z]{2,}";
-    private static String emailFormat = "^[0-9a-zA-Z]+([._+-][0-9a-zA-Z]+)*[@][0-9A-Za-z]+([.][a-zA-Z]{2,4})*$";
-    private static String mobileFormat = "^[0-9]{1,2}[ ][0-9]{10}$";
-    private static String passwordFormat = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[*.!@#$%^&(){}:'<>,.>/~`_+=|].).{8,}$";
+    private static final String nameFormat = "[A-Z][a-z]{2,}";
+    private static final String emailFormat = "^[0-9a-zA-Z]+([._+-][0-9a-zA-Z]+)*[@][0-9A-Za-z]+([.][a-zA-Z]{2,4})*$";
+    private static final String mobileFormat = "^[0-9]{1,2}[ ][0-9]{10}$";
+    private static final String passwordFormat = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[*.!@#$%^&(){}:'<>,.>/~`_+=|].).{8,}$";
+
+    ValidateUserDetailFunction userDetailFunction = (x, y) -> x.matches(y);
 
     public String validateFName(String fName) throws InvalidDetailExceptions {
         try {
-            if(fName.matches(nameFormat)){
+            if(userDetailFunction.validate(fName, nameFormat) == true) {
                 return "Success";
             }
             else {
-                throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, "Please provide valid format");
+                throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, "Invalid first name format");
             }
         }catch (NullPointerException e) {
-            throw new InvalidDetailExceptions (InvalidDetailExceptions.ExceptionType.ENTERED_NULL, "Please don't pass null value");
+            throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, "Don't pass null value");
         }
     }
 
     public String validateLName(String lName) throws InvalidDetailExceptions {
         try {
-                if(lName.matches(nameFormat)){
-                    return "Success";
-                }
-                else {
-                    throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, "Please provide valid formate");
-                }
-            }
-        catch (NullPointerException e) {
-                throw new InvalidDetailExceptions (InvalidDetailExceptions.ExceptionType.ENTERED_NULL, "Please don't pass null value");
-        }
-
-    }
-
-    public String validateEmailId(String emailId) throws InvalidDetailExceptions {
-        try {
-            if (emailId.matches(emailFormat)) {
+            if(userDetailFunction.validate(lName, nameFormat) == true){
                 return "Success";
+            }else {
+                throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, "Invalid last name format");
             }
-            else {
-                throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, "Please provide valid email");
-            }
-        }
-        catch (NullPointerException e) {
-            throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, "Don't provide null value");
+        }catch (NullPointerException e) {
+            throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, "Don't pass null value");
         }
     }
 
-    public String validatePhoneNumber(String phoneNo) throws InvalidDetailExceptions {
+    public String validateEmailId(String email) throws InvalidDetailExceptions {
         try {
-            if(phoneNo.matches(mobileFormat)) {
+            if(userDetailFunction.validate(email, emailFormat)) {
                 return "Success";
             }
             else {
-                throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, "Please provide valid phone number");
+                throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, "Invalid email format");
             }
         }
         catch (NullPointerException e) {
             throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, "Don't pass null value");
         }
     }
-    public String validatePassword(String passcode) throws InvalidDetailExceptions {
+    public String validatePhoneNumber(String phone) throws InvalidDetailExceptions {
         try {
-            if (passcode.matches(passwordFormat)) {
+            if (userDetailFunction.validate(phone, mobileFormat) == true)
+            {
                 return "Success";
             }
             else {
-                throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, "Please Provide valid password");
+                throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID,"Provide valid mobile number format");
             }
-        }
-        catch (NullPointerException e)
-        {
-            throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, "Don't provide null Value");
+        }catch (NullPointerException e) {
+            throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, "Don't pass null value");
         }
     }
 
+    public String validatePassword(String passcode) throws InvalidDetailExceptions {
+        try {
+            if (userDetailFunction.validate(passcode, passwordFormat))
+            {
+                return "Success";
+            }
+            else {
+                throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, "Provide valid password Format");
+            }
+        }catch (NullPointerException e){
+            throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, "Don't pass null value");
+        }
+    }
 
     public String moodAnalyse(String fName, String lName, String phoneNumber, String email, String password ) throws InvalidDetailExceptions {
         try{
@@ -89,7 +86,5 @@ public class UserRegistration {
         {
             throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, "Dont pass null value");
         }
-
     }
-
 }

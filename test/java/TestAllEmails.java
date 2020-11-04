@@ -32,7 +32,7 @@ public class TestAllEmails {
     }
 
     @Test
-    public void passAllValidEmails_whenExpectedSameForall_ShouldReturnSuccess() {
+    public void testEmailIds() {
         UserRegistration userRegistration = new UserRegistration();
         String email = null;
         try {
