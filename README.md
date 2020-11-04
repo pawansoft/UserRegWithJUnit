@@ -1,1 +1,1 @@
-# validating user detail and testing it by JUnit
+# User Registration form validation using REGEX

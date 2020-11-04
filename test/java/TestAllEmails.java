@@ -32,11 +32,11 @@ public class TestAllEmails {
     }
 
     @Test
-    public void testEmailIds() {
+    public void passAllValidEmails_whenExpectedSameForall_ShouldReturnSuccess() {
         UserRegistration userRegistration = new UserRegistration();
         String email = null;
         try {
-             email = userRegistration.checkEmail(emails);
+             email = userRegistration.validateEmailId(emails);
         }
         catch (InvalidDetailExceptions e)
         {

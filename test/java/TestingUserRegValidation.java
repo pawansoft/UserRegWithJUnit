@@ -8,7 +8,7 @@ public class TestingUserRegValidation {
         UserRegistration userRegistration = new UserRegistration();
         String isFNameValid = null;
         try {
-            isFNameValid = userRegistration.checkFName("Pawan");
+            isFNameValid = userRegistration.validateFName("Pawan");
         }
         catch (InvalidDetailExceptions e){
             Assert.assertEquals("Success", isFNameValid);
@@ -21,7 +21,7 @@ public class TestingUserRegValidation {
         UserRegistration userRegistration = new UserRegistration();
         String isFNameValid = null;
         try {
-            userRegistration.checkFName("pawan");
+            userRegistration.validateFName("pawan");
         }
         catch (InvalidDetailExceptions e){
             Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, e.type);
@@ -33,7 +33,7 @@ public class TestingUserRegValidation {
         UserRegistration userRegistration = new UserRegistration();
         String isFNameValid = null;
         try {
-            userRegistration.checkFName(null);
+            userRegistration.validateFName(null);
         }
         catch (InvalidDetailExceptions e){
             Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, e.type);
@@ -45,7 +45,7 @@ public class TestingUserRegValidation {
         UserRegistration userRegistration = new UserRegistration();
         String islNameValid = null;
         try {
-            islNameValid = userRegistration.checkLName("Kumar");
+            islNameValid = userRegistration.validateLName("Kumar");
         }
         catch (InvalidDetailExceptions e){
             Assert.assertEquals("Success" , islNameValid);
@@ -56,7 +56,7 @@ public class TestingUserRegValidation {
     public void testLastName_WhenValueIsInvalid_ShouldThrowInvalidException(){
         UserRegistration userRegistration = new UserRegistration();
         try {
-           userRegistration.checkLName("Kumar");
+           userRegistration.validateLName("Kumar");
         }
         catch (InvalidDetailExceptions e){
             Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, e.type);
@@ -67,7 +67,7 @@ public class TestingUserRegValidation {
     public void testLastName_WhenValueIsNull_ShouldThrowNullPointerException(){
         UserRegistration userRegistration = new UserRegistration();
         try {
-            userRegistration.checkLName(null);
+            userRegistration.validateLName(null);
         }
         catch (InvalidDetailExceptions e){
             Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, e.type);
@@ -79,7 +79,7 @@ public class TestingUserRegValidation {
         UserRegistration userRegistration = new UserRegistration();
         String isEmailValid = null;
         try {
-                isEmailValid = userRegistration.checkEmail("pk.soft29@gmail.com");
+                isEmailValid = userRegistration.validateEmailId("pk.soft29@gmail.com");
         }
         catch (InvalidDetailExceptions e)
         {
@@ -91,7 +91,7 @@ public class TestingUserRegValidation {
     public void testEmailId_WhenValueIsInvalid_ShouldThrowInvalidDetailException() {
         UserRegistration userRegistration = new UserRegistration();
         try {
-            userRegistration.checkEmail("pk.@.com");
+            userRegistration.validateEmailId("pk.@.com");
         }
         catch (InvalidDetailExceptions e) {
             Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, e.type);
@@ -102,7 +102,7 @@ public class TestingUserRegValidation {
     public void testEmailId_WhenValueIsNull_ShouldThrowNullPointerException() {
         UserRegistration userRegistration = new UserRegistration();
         try {
-            userRegistration.checkEmail(null);
+            userRegistration.validateEmailId(null);
         }
         catch (InvalidDetailExceptions e) {
             Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, e.type);
@@ -114,7 +114,7 @@ public class TestingUserRegValidation {
         UserRegistration userRegistration = new UserRegistration();
         String isPhoneValid = null;
         try {
-            isPhoneValid = userRegistration.checkPhoneNumber("91 8082273213");
+            isPhoneValid = userRegistration.validatePhoneNumber("91 8082273213");
         }
         catch (InvalidDetailExceptions e) {
             Assert.assertEquals("Success", isPhoneValid);
@@ -125,7 +125,7 @@ public class TestingUserRegValidation {
     public void testMobileNum_WhenValueIsInvalid_ShouldInvalidDetailException() {
         UserRegistration userRegistration = new UserRegistration();
         try {
-            userRegistration.checkPhoneNumber("808337");
+            userRegistration.validatePhoneNumber("808337");
         }
         catch (InvalidDetailExceptions e) {
             Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, e.type);
@@ -136,7 +136,7 @@ public class TestingUserRegValidation {
     public void testMobileNum_WhenPassedNullValue_ShouldThrowNullPointerException() {
         UserRegistration userRegistration = new UserRegistration();
         try {
-            userRegistration.checkPhoneNumber(null);
+            userRegistration.validatePhoneNumber(null);
         }
         catch (InvalidDetailExceptions e) {
             Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, e.type);
@@ -144,11 +144,11 @@ public class TestingUserRegValidation {
     }
 
     @Test
-    public void testPassword_WhenSatisfyRule2_ShouldReturnSuccess() {
+    public void testPassword_WhenSatisfy_AtleastOneNumberOneUppercaseOneSpecialLetterRule_ShouldReturnSuccess() {
         UserRegistration userRegistration = new UserRegistration();
         String isValidPassword = null;
         try {
-            isValidPassword = userRegistration.checkPassword("Pk@804426");
+            isValidPassword = userRegistration.validatePassword("k@80P4426");
         }
         catch (InvalidDetailExceptions e){
             Assert.assertEquals("Success", isValidPassword);
@@ -156,10 +156,10 @@ public class TestingUserRegValidation {
     }
 
     @Test
-    public void testPassword_WhenNotSatisfyRule2_ShouldThrowInvalidPassException() {
+    public void testPassword_WhenNotSatisfy_AtleastOneNumberOneUppercaseOneSpecialLetterRule_ShouldThrowInvalidPassException() {
         UserRegistration userRegistration = new UserRegistration();
         try {
-            userRegistration.checkPassword("abc");
+            userRegistration.validatePassword("abc");
         }
         catch (InvalidDetailExceptions e){
             Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_INVALID, e.type);
@@ -171,7 +171,7 @@ public class TestingUserRegValidation {
     public void testPassword_WhenPassedNullValue_ShouldThrowNullPointerException() {
         UserRegistration userRegistration = new UserRegistration();
         try {
-            userRegistration.checkPassword(null);
+            userRegistration.validatePassword(null);
         }
         catch (InvalidDetailExceptions e){
             Assert.assertEquals(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, e.type);

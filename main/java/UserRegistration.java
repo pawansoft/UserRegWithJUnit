@@ -5,7 +5,7 @@ public class UserRegistration {
     private static String mobileFormat = "^[0-9]{1,2}[ ][0-9]{10}$";
     private static String passwordFormat = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[*.!@#$%^&(){}:'<>,.>/~`_+=|].).{8,}$";
 
-    public String checkFName(String fName) throws InvalidDetailExceptions {
+    public String validateFName(String fName) throws InvalidDetailExceptions {
         try {
             if(fName.matches(nameFormat)){
                 return "Success";
@@ -18,7 +18,7 @@ public class UserRegistration {
         }
     }
 
-    public String checkLName(String lName) throws InvalidDetailExceptions {
+    public String validateLName(String lName) throws InvalidDetailExceptions {
         try {
                 if(lName.matches(nameFormat)){
                     return "Success";
@@ -33,7 +33,7 @@ public class UserRegistration {
 
     }
 
-    public String checkEmail(String emailId) throws InvalidDetailExceptions {
+    public String validateEmailId(String emailId) throws InvalidDetailExceptions {
         try {
             if (emailId.matches(emailFormat)) {
                 return "Success";
@@ -47,7 +47,7 @@ public class UserRegistration {
         }
     }
 
-    public String checkPhoneNumber(String phoneNo) throws InvalidDetailExceptions {
+    public String validatePhoneNumber(String phoneNo) throws InvalidDetailExceptions {
         try {
             if(phoneNo.matches(mobileFormat)) {
                 return "Success";
@@ -60,7 +60,7 @@ public class UserRegistration {
             throw new InvalidDetailExceptions(InvalidDetailExceptions.ExceptionType.ENTERED_NULL, "Don't pass null value");
         }
     }
-    public String checkPassword(String passcode) throws InvalidDetailExceptions {
+    public String validatePassword(String passcode) throws InvalidDetailExceptions {
         try {
             if (passcode.matches(passwordFormat)) {
                 return "Success";
@@ -78,7 +78,7 @@ public class UserRegistration {
 
     public String moodAnalyse(String fName, String lName, String phoneNumber, String email, String password ) throws InvalidDetailExceptions {
         try{
-            if(checkFName(fName) == "Success" && checkLName(lName) == "Success" && checkEmail(email) == "Success" && checkPhoneNumber(phoneNumber) == "Success" && checkPassword(password) == "Success"){
+            if(validateFName(fName) == "Success" && validateLName(lName) == "Success" && validateEmailId(email) == "Success" && validatePhoneNumber(phoneNumber) == "Success" && validatePassword(password) == "Success"){
                 return "HAPPY";
             }
             else {
